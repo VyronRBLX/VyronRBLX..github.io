@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luau Developer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Luau Scripter Portfolio | Professional Roblox Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00D9FF;
-            --secondary: #FF006E;
-            --accent: #FFBE0B;
-            --dark: #0A0E27;
-            --darker: #050812;
-            --light: #E8F4F8;
-            --grid: #1a2145;
+            --galaxy-purple: #7B2CBF;
+            --galaxy-blue: #4361EE;
+            --deep-space: #0B0D1E;
+            --cosmic-purple: #B185DB;
+            --electric-blue: #4CC9F0;
+            --starlight: #F8F9FA;
+            --nebula-pink: #C77DFF;
+            --dark-matter: #10002B;
+            --void: #050714;
         }
 
         * {
@@ -23,14 +25,63 @@
         }
 
         body {
-            font-family: 'Space Mono', monospace;
-            background: var(--darker);
-            color: var(--light);
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--starlight);
             overflow-x: hidden;
             position: relative;
+            cursor: none;
         }
 
-        /* Animated Grid Background */
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--electric-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(76, 201, 240, 0.15) 0%, rgba(123, 44, 191, 0.1) 30%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transition: all 0.05s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Starfield Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Nebula Background */
         body::before {
             content: '';
             position: fixed;
@@ -38,42 +89,17 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 49px, var(--grid) 49px, var(--grid) 50px),
-                repeating-linear-gradient(90deg, transparent, transparent 49px, var(--grid) 49px, var(--grid) 50px);
-            animation: gridScroll 20s linear infinite;
-            opacity: 0.3;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(123, 44, 191, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(67, 97, 238, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(199, 125, 255, 0.2) 0%, transparent 60%);
             z-index: 0;
+            animation: nebulaDrift 20s ease-in-out infinite;
         }
 
-        @keyframes gridScroll {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Floating particles */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0;
-            animation: float 8s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                opacity: 0;
-                transform: translateY(100vh) scale(0);
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-100px) scale(1);
-            }
+        @keyframes nebulaDrift {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
         }
 
         .container {
@@ -84,755 +110,1087 @@
             z-index: 2;
         }
 
-        /* Header */
-        header {
+        /* Navigation */
+        nav {
             padding: 2rem 0;
-            position: relative;
+            position: sticky;
+            top: 0;
+            background: rgba(5, 7, 20, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(76, 201, 240, 0.2);
         }
 
-        nav {
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--primary);
-            border-radius: 0;
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
-            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--electric-blue), var(--nebula-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(76, 201, 240, 0.5);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--starlight);
             text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
             position: relative;
-            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
 
-        .nav-links a::before {
-            content: '>';
+        .nav-links a::after {
+            content: '';
             position: absolute;
+            bottom: -5px;
             left: 0;
-            opacity: 0;
-            transition: all 0.3s ease;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--nebula-pink));
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
-            padding-left: 1.5rem;
+            color: var(--electric-blue);
         }
 
-        .nav-links a:hover::before {
-            opacity: 1;
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
-            padding: 6rem 0;
+            padding: 8rem 0 6rem;
             text-align: center;
             position: relative;
         }
 
         .hero h1 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             font-size: 5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--electric-blue) 0%, var(--nebula-pink) 50%, var(--galaxy-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            animation: glitch 3s infinite;
+            animation: titleGlow 3s ease-in-out infinite;
             line-height: 1.2;
         }
 
-        @keyframes glitch {
-            0%, 90%, 100% {
-                transform: translate(0);
+        @keyframes titleGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(76, 201, 240, 0.3));
             }
-            92% {
-                transform: translate(-2px, 2px);
-            }
-            94% {
-                transform: translate(2px, -2px);
-            }
-            96% {
-                transform: translate(-2px, -2px);
+            50% {
+                filter: drop-shadow(0 0 40px rgba(199, 125, 255, 0.5));
             }
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 3rem;
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--cosmic-purple);
+            margin-bottom: 1.5rem;
             font-weight: 400;
+            letter-spacing: 3px;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background: transparent;
-            color: var(--primary);
-            border: 3px solid var(--primary);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(248, 249, 250, 0.7);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
             font-size: 1.1rem;
             text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            letter-spacing: 1px;
         }
 
-        .cta-button::before {
+        .btn-primary {
+            background: linear-gradient(135deg, var(--galaxy-blue), var(--galaxy-purple));
+            color: white;
+            border: 2px solid transparent;
+            box-shadow: 0 0 30px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(67, 97, 238, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--electric-blue);
+            border: 2px solid var(--electric-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(76, 201, 240, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(76, 201, 240, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--electric-blue), var(--nebula-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(248, 249, 250, 0.6);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: rgba(248, 249, 250, 0.8);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(123, 44, 191, 0.1);
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(123, 44, 191, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-box:hover::before {
+            opacity: 1;
+        }
+
+        .stat-box:hover {
+            border-color: var(--electric-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(76, 201, 240, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(248, 249, 250, 0.7);
+            font-size: 1.1rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(11, 13, 30, 0.8), rgba(16, 0, 43, 0.6));
+            border: 2px solid rgba(76, 201, 240, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--primary);
-            transition: left 0.3s ease;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(76, 201, 240, 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
-        .cta-button:hover {
-            color: var(--dark);
-        }
-
-        .cta-button:hover::before {
-            left: 0;
-        }
-
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(255, 0, 110, 0.1));
-            border: 2px solid var(--primary);
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-        }
-
-        .stat-card:hover::before {
+        .project-card:hover::before {
             left: 100%;
         }
 
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary);
-            text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            color: var(--light);
-            margin-top: 0.5rem;
-        }
-
-        /* Projects Section */
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(10, 14, 39, 0.6);
-            border: 2px solid var(--grid);
-            padding: 2rem;
-            position: relative;
-            transition: all 0.3s ease;
-            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-        }
-
         .project-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+            border-color: var(--electric-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(76, 201, 240, 0.4);
         }
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.3), rgba(123, 44, 191, 0.3));
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--electric-blue);
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .project-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--accent);
-        }
-
-        .project-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: var(--dark);
-            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
         }
 
         .project-description {
-            color: var(--light);
-            line-height: 1.6;
+            color: rgba(248, 249, 250, 0.7);
+            line-height: 1.8;
             margin-bottom: 1.5rem;
         }
 
-        .tech-tags {
+        .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
 
         .tech-tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(0, 217, 255, 0.2);
-            border: 1px solid var(--primary);
+            padding: 0.4rem 1rem;
+            background: rgba(76, 201, 240, 0.1);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+            border-radius: 15px;
             font-size: 0.85rem;
-            color: var(--primary);
+            color: var(--cosmic-purple);
         }
 
-        /* Skills Section */
-        .skills-container {
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(11, 13, 30, 0.9), rgba(16, 0, 43, 0.7));
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--nebula-pink);
+            box-shadow: 0 0 50px rgba(199, 125, 255, 0.3);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(76, 201, 240, 0.4);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--nebula-pink), var(--galaxy-purple));
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .pricing-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--nebula-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: rgba(248, 249, 250, 0.6);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            color: rgba(248, 249, 250, 0.8);
+            border-bottom: 1px solid rgba(76, 201, 240, 0.1);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .pricing-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--electric-blue);
+            font-size: 1.2rem;
+        }
+
+        /* Payment & Delivery */
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .skill-category {
-            background: rgba(10, 14, 39, 0.6);
-            border-left: 4px solid var(--secondary);
-            padding: 2rem;
+        .info-card {
+            background: linear-gradient(135deg, rgba(11, 13, 30, 0.8), rgba(16, 0, 43, 0.6));
+            border: 2px solid rgba(76, 201, 240, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
         }
 
-        .skill-category h3 {
-            font-family: 'Orbitron', sans-serif;
+        .info-card:hover {
+            border-color: var(--electric-blue);
+            box-shadow: 0 10px 40px rgba(76, 201, 240, 0.3);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+        }
+
+        .info-content {
+            color: rgba(248, 249, 250, 0.8);
+            line-height: 1.8;
+        }
+
+        .info-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .info-content li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .info-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--cosmic-purple);
+        }
+
+        /* Terms of Service */
+        .terms-content {
+            background: linear-gradient(135deg, rgba(11, 13, 30, 0.8), rgba(16, 0, 43, 0.6));
+            border: 2px solid rgba(76, 201, 240, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+
+        .terms-content h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            color: var(--electric-blue);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .terms-content p, .terms-content ul {
+            color: rgba(248, 249, 250, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .terms-content ul {
+            list-style: none;
+            padding-left: 2rem;
+        }
+
+        .terms-content li {
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .terms-content li::before {
+            content: '•';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--cosmic-purple);
             font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            color: var(--light);
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--grid);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            position: relative;
-            animation: fillBar 2s ease-out forwards;
-            transform-origin: left;
-        }
-
-        @keyframes fillBar {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
         }
 
         /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(255, 0, 110, 0.05));
-            border: 2px solid var(--primary);
-            padding: 3rem;
-            margin: 4rem 0;
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(11, 13, 30, 0.9), rgba(16, 0, 43, 0.7));
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            border-radius: 25px;
+            padding: 4rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .contact h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            position: relative;
-            z-index: 1;
+            margin-top: 3rem;
         }
 
-        .social-link {
-            width: 60px;
-            height: 60px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.5rem;
-            text-decoration: none;
+        .contact-method {
+            padding: 2rem;
+            background: rgba(76, 201, 240, 0.05);
+            border: 2px solid rgba(76, 201, 240, 0.2);
+            border-radius: 15px;
             transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
 
-        .social-link:hover {
-            background: var(--primary);
-            color: var(--dark);
-            transform: scale(1.1);
+        .contact-method:hover {
+            border-color: var(--electric-blue);
+            background: rgba(76, 201, 240, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-value {
+            color: rgba(248, 249, 250, 0.8);
+            word-break: break-all;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: var(--grid);
-            border-top: 2px solid var(--grid);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(76, 201, 240, 0.2);
+            color: rgba(248, 249, 250, 0.5);
+            margin-top: 4rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
 
             .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: center;
             }
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 12px;
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--darker);
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 0;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Particles -->
-    <div id="particles"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
 
     <!-- Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">LUA.DEV</div>
-                <ul class="nav-links">
-                    <li><a href="#projects">PROJECTS</a></li>
-                    <li><a href="#skills">SKILLS</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </nav>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">LUAU.DEV</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#terms">Terms</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>ROBLOX LUAU<br>DEVELOPER</h1>
-            <p class="subtitle">// Building immersive experiences with code</p>
-            <a href="#projects" class="cta-button">VIEW PROJECTS</a>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="container">
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Projects Completed</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">10M+</div>
-                <div class="stat-label">Total Game Visits</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99%</div>
-                <div class="stat-label">Client Satisfaction</div>
+            <h1>ROBLOX LUAU<br>SCRIPTER</h1>
+            <h2>PROFESSIONAL GAME DEVELOPMENT</h2>
+            <p>Transforming ideas into immersive Roblox experiences with clean, efficient, and scalable Luau code. Specialized in custom systems, optimization, and bringing your creative vision to life.</p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn btn-primary">View Services</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
         <div class="container">
-            <h2 class="section-title">// FEATURED PROJECTS</h2>
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">Experienced developer crafting exceptional Roblox experiences</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm a professional Roblox Luau scripter with over 5 years of experience in game development. I specialize in creating custom gameplay systems, optimizing performance, and building scalable architectures for games of all sizes.</p>
+                    <p>My passion lies in writing clean, maintainable code that not only works flawlessly but is also easy to understand and modify. Whether you need a complex combat system, an intricate economy, or seamless multiplayer functionality, I deliver professional-grade solutions tailored to your needs.</p>
+                    <p>I believe in transparency, clear communication, and exceeding client expectations. Every project I undertake receives my full dedication and technical expertise.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">50M+</div>
+                        <div class="stat-label">Player Visits</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="section fade-in">
+        <div class="container">
+            <h2 class="section-title">My Work</h2>
+            <p class="section-subtitle">Featured Projects & Open Source Contributions</p>
+            
+            <h3 style="color: var(--electric-blue); font-size: 2rem; margin-top: 3rem; margin-bottom: 2rem; font-family: 'Exo 2', sans-serif;">Client Projects</h3>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Combat System</h3>
-                        <div class="project-icon">CS</div>
-                    </div>
+                    <span class="project-tag">FEATURED</span>
+                    <h3 class="project-title">Advanced Combat Framework</h3>
                     <p class="project-description">
-                        Advanced melee and ranged combat system with hit detection, combo chains, and particle effects. 
-                        Features include damage calculation, cooldown management, and smooth animations.
+                        Comprehensive melee and ranged combat system with combo mechanics, damage calculation, hitbox validation, and smooth animations. Features client-side prediction with server-side verification for optimal performance.
                     </p>
-                    <div class="tech-tags">
+                    <div class="tech-stack">
                         <span class="tech-tag">Luau</span>
                         <span class="tech-tag">RemoteEvents</span>
                         <span class="tech-tag">TweenService</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Inventory Manager</h3>
-                        <div class="project-icon">IM</div>
-                    </div>
-                    <p class="project-description">
-                        Fully-featured inventory system with drag-and-drop UI, item stacking, and persistent data storage. 
-                        Includes crafting recipes and equipment slots with stat bonuses.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Luau</span>
-                        <span class="tech-tag">DataStores</span>
                         <span class="tech-tag">OOP</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Quest Framework</h3>
-                        <div class="project-icon">QF</div>
-                    </div>
+                    <span class="project-tag">COMMERCIAL</span>
+                    <h3 class="project-title">Economy & Trading System</h3>
                     <p class="project-description">
-                        Modular quest system supporting multiple objectives, branching paths, and reward distribution. 
-                        Built with scalability in mind for easy quest creation and management.
+                        Full-featured economy system with multiple currencies, player-to-player trading, marketplace, auction house, and transaction history. Includes comprehensive anti-exploit measures and rate limiting.
                     </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Luau</span>
-                        <span class="tech-tag">ModuleScripts</span>
-                        <span class="tech-tag">Events</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">AI Pathfinding</h3>
-                        <div class="project-icon">AI</div>
-                    </div>
-                    <p class="project-description">
-                        Intelligent NPC navigation system using PathfindingService with custom algorithms for enemy behavior, 
-                        patrol routes, and dynamic obstacle avoidance.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Luau</span>
-                        <span class="tech-tag">Pathfinding</span>
-                        <span class="tech-tag">Coroutines</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Economy System</h3>
-                        <div class="project-icon">EC</div>
-                    </div>
-                    <p class="project-description">
-                        Comprehensive economy with multiple currencies, trading, shops, and marketplace. 
-                        Features transaction logging and anti-exploit measures for secure trading.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Luau</span>
+                    <div class="tech-stack">
                         <span class="tech-tag">DataStores</span>
+                        <span class="tech-tag">ProfileService</span>
                         <span class="tech-tag">Security</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Animation Controller</h3>
-                        <div class="project-icon">AC</div>
-                    </div>
+                    <span class="project-tag">MULTIPLAYER</span>
+                    <h3 class="project-title">Party & Matchmaking System</h3>
                     <p class="project-description">
-                        Smooth character animation system with state machines, blend trees, and custom emotes. 
-                        Supports animation layering and procedural movements.
+                        Sophisticated matchmaking system with ELO ratings, party formation, skill-based matching, and cross-server teleportation. Optimized for minimal latency and maximum player satisfaction.
                     </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Luau</span>
-                        <span class="tech-tag">Animator</span>
-                        <span class="tech-tag">States</span>
+                    <div class="tech-stack">
+                        <span class="tech-tag">MessagingService</span>
+                        <span class="tech-tag">TeleportService</span>
+                        <span class="tech-tag">Algorithms</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">RPG</span>
+                    <h3 class="project-title">Quest & Progression System</h3>
+                    <p class="project-description">
+                        Modular quest framework supporting linear, branching, and repeatable quests. Features include objectives tracking, rewards distribution, skill trees, and achievement unlocks with persistent data.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">ModuleScripts</span>
+                        <span class="tech-tag">JSON</span>
+                        <span class="tech-tag">Events</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">AI</span>
+                    <h3 class="project-title">NPC Behavior System</h3>
+                    <p class="project-description">
+                        Intelligent NPC system with state machines, pathfinding, combat AI, patrol routes, and dynamic decision-making. Includes performance optimization for handling hundreds of NPCs simultaneously.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PathfindingService</span>
+                        <span class="tech-tag">State Machines</span>
+                        <span class="tech-tag">Optimization</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">UTILITY</span>
+                    <h3 class="project-title">Admin Command Suite</h3>
+                    <p class="project-description">
+                        Comprehensive admin system with 100+ commands, permission levels, logging, and anti-abuse features. User-friendly interface with command suggestions and parameter validation.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Commands</span>
+                        <span class="tech-tag">UI Design</span>
+                        <span class="tech-tag">Security</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--nebula-pink); font-size: 2rem; margin-top: 4rem; margin-bottom: 2rem; font-family: 'Exo 2', sans-serif;">Open Source Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <span class="project-tag">OPEN SOURCE</span>
+                    <h3 class="project-title">DataSync Framework</h3>
+                    <p class="project-description">
+                        Lightweight data replication framework for syncing game state between server and client. Features automatic serialization, delta compression, and conflict resolution. Free to use and modify.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Replication</span>
+                        <span class="tech-tag">Networking</span>
+                        <span class="tech-tag">MIT License</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">UTILITY</span>
+                    <h3 class="project-title">LuaSignal Library</h3>
+                    <p class="project-description">
+                        Type-safe event system implementation inspired by Roblox's RBXScriptSignal. Provides clean API for creating custom events with connection management and memory leak prevention.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Events</span>
+                        <span class="tech-tag">Type Safety</span>
+                        <span class="tech-tag">Open Source</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">TOOL</span>
+                    <h3 class="project-title">Performance Profiler</h3>
+                    <p class="project-description">
+                        Real-time performance monitoring tool that tracks script execution time, memory usage, and network traffic. Helps identify bottlenecks and optimize game performance during development.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Debugging</span>
+                        <span class="tech-tag">Analytics</span>
+                        <span class="tech-tag">Free</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
+    <!-- Pricing Section -->
+    <section id="pricing" class="section fade-in">
         <div class="container">
-            <h2 class="section-title">// TECHNICAL SKILLS</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Core Programming</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Luau Scripting</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>OOP Design Patterns</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Module Architecture</span>
-                            <span>88%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 88%"></div>
-                        </div>
+            <h2 class="section-title">Pricing</h2>
+            <p class="section-subtitle">Transparent, competitive rates for quality development</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Basic</h3>
+                    <div class="pricing-price">$500</div>
+                    <p class="pricing-period">Starting Rate</p>
+                    <ul class="pricing-features">
+                        <li>Simple systems & features</li>
+                        <li>UI implementations</li>
+                        <li>Bug fixes & debugging</li>
+                        <li>Code review</li>
+                        <li>1 week delivery</li>
+                        <li>1 revision included</li>
+                        <li>Basic documentation</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">POPULAR</span>
+                    <h3 class="pricing-title">Professional</h3>
+                    <div class="pricing-price">$1,500</div>
+                    <p class="pricing-period">Starting Rate</p>
+                    <ul class="pricing-features">
+                        <li>Complex game systems</li>
+                        <li>Custom frameworks</li>
+                        <li>Performance optimization</li>
+                        <li>Security implementation</li>
+                        <li>2-3 week delivery</li>
+                        <li>3 revisions included</li>
+                        <li>Comprehensive docs</li>
+                        <li>2 weeks support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Enterprise</h3>
+                    <div class="pricing-price">Custom</div>
+                    <p class="pricing-period">Quote-Based</p>
+                    <ul class="pricing-features">
+                        <li>Full game development</li>
+                        <li>Large-scale systems</li>
+                        <li>Dedicated support</li>
+                        <li>Priority delivery</li>
+                        <li>Flexible timeline</li>
+                        <li>Unlimited revisions</li>
+                        <li>Complete documentation</li>
+                        <li>1 month+ support</li>
+                        <li>Source code ownership</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" style="width: 100%;">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment & Delivery Info -->
+    <section class="section fade-in">
+        <div class="container">
+            <h2 class="section-title">Process & Information</h2>
+            <p class="section-subtitle">How I work with clients</p>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">💳</div>
+                    <h3 class="info-title">Payment Options</h3>
+                    <div class="info-content">
+                        <p>I accept multiple payment methods for your convenience:</p>
+                        <ul>
+                            <li>PayPal (Preferred)</li>
+                            <li>Venmo</li>
+                            <li>Crypto (BTC, ETH, USDC)</li>
+                            <li>Bank Transfer (Large projects)</li>
+                            <li>Roblox Group Funds (10% fee)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">50% upfront, 50% on completion for projects over $1000</p>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Roblox Services</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>DataStore Service</span>
-                            <span>92%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 92%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>RemoteEvents/Functions</span>
-                            <span>93%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 93%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>TweenService</span>
-                            <span>87%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 87%"></div>
-                        </div>
+                <div class="info-card">
+                    <div class="info-icon">⚡</div>
+                    <h3 class="info-title">Delivery Times</h3>
+                    <div class="info-content">
+                        <p>Estimated delivery based on project scope:</p>
+                        <ul>
+                            <li>Small features: 3-7 days</li>
+                            <li>Medium systems: 1-2 weeks</li>
+                            <li>Large systems: 2-4 weeks</li>
+                            <li>Complete games: 1-3 months</li>
+                            <li>Rush orders: +30% fee</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Timeline confirmed after project discussion</p>
                     </div>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Game Development</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>UI/UX Design</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Game Optimization</span>
-                            <span>89%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 89%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Security & Anti-Exploit</span>
-                            <span>86%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 86%"></div>
-                        </div>
+                <div class="info-card">
+                    <div class="info-icon">🟢</div>
+                    <h3 class="info-title">Availability</h3>
+                    <div class="info-content">
+                        <p>Current status and response times:</p>
+                        <ul>
+                            <li>Status: <strong style="color: var(--electric-blue);">Available</strong></li>
+                            <li>Queue: 2 active projects</li>
+                            <li>Response time: 24 hours</li>
+                            <li>Time zone: EST (UTC-5)</li>
+                            <li>Working hours: 9 AM - 8 PM EST</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Weekend work available with notice</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms of Service -->
+    <section id="terms" class="section fade-in">
+        <div class="container">
+            <h2 class="section-title">Terms of Service</h2>
+            <p class="section-subtitle">Please read before commissioning work</p>
+            <div class="terms-content">
+                <h3>1. Project Agreement</h3>
+                <p>All projects require a written agreement outlining scope, deliverables, timeline, and payment terms. Changes to scope may result in adjusted pricing and timelines.</p>
+
+                <h3>2. Payment Terms</h3>
+                <ul>
+                    <li>Projects under $500: Full payment upfront</li>
+                    <li>Projects $500-$1000: 50% upfront, 50% on delivery</li>
+                    <li>Projects over $1000: 50% upfront, 25% at milestone, 25% on completion</li>
+                    <li>All prices in USD unless otherwise specified</li>
+                    <li>Refunds considered case-by-case for unstarted work only</li>
+                </ul>
+
+                <h3>3. Revisions & Support</h3>
+                <p>The number of revisions included varies by package. Additional revisions are billed at $75/hour. Post-delivery support is provided for the duration specified in your package. Bug fixes for code I wrote are always free within 30 days.</p>
+
+                <h3>4. Intellectual Property</h3>
+                <ul>
+                    <li>Client receives full rights to commissioned code upon final payment</li>
+                    <li>I retain the right to showcase work in my portfolio (unless NDA)</li>
+                    <li>Generic libraries/frameworks remain my intellectual property</li>
+                    <li>Third-party assets/code will be clearly documented</li>
+                </ul>
+
+                <h3>5. Confidentiality</h3>
+                <p>I respect your privacy and game concepts. All project details are kept confidential. NDAs available upon request for sensitive projects at no additional cost.</p>
+
+                <h3>6. Delivery & Quality</h3>
+                <ul>
+                    <li>All code is tested before delivery</li>
+                    <li>Code follows best practices and is well-documented</li>
+                    <li>Source files provided in organized structure</li>
+                    <li>Implementation support included</li>
+                </ul>
+
+                <h3>7. Cancellation Policy</h3>
+                <p>Either party may cancel with 48 hours notice. Clients are billed for completed work. Deposits are non-refundable after work has begun.</p>
+
+                <h3>8. Liability</h3>
+                <p>While I strive for perfection, I cannot guarantee code will be 100% bug-free. I am not liable for any loss of revenue, data, or other damages. My liability is limited to the project cost.</p>
+
+                <p style="margin-top: 2rem; font-style: italic; color: rgba(248, 249, 250, 0.6);">By commissioning work, you agree to these terms. Last updated: February 2026</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container">
-        <div class="contact">
-            <h2>LET'S BUILD SOMETHING AMAZING</h2>
-            <p>Ready to bring your Roblox game ideas to life? Get in touch!</p>
-            <div class="social-links">
-                <a href="#" class="social-link" title="GitHub">GH</a>
-                <a href="#" class="social-link" title="Discord">DC</a>
-                <a href="#" class="social-link" title="Twitter">TW</a>
-                <a href="#" class="social-link" title="Email">EM</a>
+    <section id="contact" class="section fade-in">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's discuss your project</p>
+            <div class="contact-container">
+                <p style="font-size: 1.2rem; color: rgba(248, 249, 250, 0.8); margin-bottom: 2rem;">
+                    Ready to start your project? Reach out through any of these platforms. I typically respond within 24 hours.
+                </p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">dev@luauscripts.com</div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-label">Discord</div>
+                        <div class="contact-value">luaudev#0001</div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">🐦</div>
+                        <div class="contact-label">Twitter</div>
+                        <div class="contact-value">@LuauScripter</div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">🎮</div>
+                        <div class="contact-label">Roblox</div>
+                        <div class="contact-value">@LuauDeveloper</div>
+                    </div>
+                </div>
+                <p style="margin-top: 3rem; color: rgba(248, 249, 250, 0.6);">
+                    Please include project details, budget, and timeline in your initial message for faster response.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Luau Developer Portfolio. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 Luau Developer Portfolio. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Crafted with passion for the Roblox development community</p>
+        </div>
     </footer>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorGlow = document.querySelector('.cursor-glow');
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                
-                // Random colors
-                const colors = ['#00D9FF', '#FF006E', '#FFBE0B'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Add hover effect to interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .project-card, .pricing-card, .stat-box');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.borderColor = 'var(--nebula-pink)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = 'var(--electric-blue)';
+            });
+        });
+
+        // Generate stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
             }
         }
 
-        // Smooth scroll for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -846,32 +1204,42 @@
             });
         });
 
-        // Initialize
-        createParticles();
-
-        // Add scroll reveal animation for project cards
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100);
+                    entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize
+        createStars();
+
+        // Add glow effect on scroll
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const scrollDelta = Math.abs(scrollY - lastScrollY);
+            
+            if (scrollDelta > 5) {
+                cursorGlow.style.background = 'radial-gradient(circle, rgba(199, 125, 255, 0.25) 0%, rgba(76, 201, 240, 0.15) 30%, transparent 70%)';
+                setTimeout(() => {
+                    cursorGlow.style.background = 'radial-gradient(circle, rgba(76, 201, 240, 0.15) 0%, rgba(123, 44, 191, 0.1) 30%, transparent 70%)';
+                }, 200);
+            }
+            
+            lastScrollY = scrollY;
         });
     </script>
 </body>
