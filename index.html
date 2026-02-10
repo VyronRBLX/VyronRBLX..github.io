@@ -29,7 +29,7 @@
         }
 
         header {
-            background: var(--bg);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             padding: 0.75rem 0;
             position: sticky;
             top: 0;
@@ -293,6 +293,42 @@
             color: var(--primary);
         }
 
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .terms-box {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(90, 25, 154, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .terms-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            border-color: var(--light);
+        }
+
+        .terms-box h3 {
+            color: var(--light);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .terms-box p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            text-align: center;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -333,6 +369,11 @@
 
             .project-card {
                 padding: 1.5rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
         }
 
@@ -379,6 +420,23 @@
             .payment-container {
                 padding: 1.5rem;
                 margin: 0 1rem;
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .terms-box {
+                padding: 1.5rem;
+            }
+
+            .terms-box h3 {
+                font-size: 1rem;
+            }
+
+            .terms-box p {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -511,18 +569,12 @@
 
     <!-- Payment Section -->
     <section id="payment">
-        <h2>Payment & Pricing</h2>
-        <p class="section-subtitle">Transparent payment terms</p>
+        <h2>Payment Options</h2>
+        <p class="section-subtitle">Available payment methods</p>
         <div class="payment-container">
-            <h3>Payment Method</h3>
-            <p><span class="payment-highlight">Robux Only</span></p>
-            <p>All payments must be made in Robux through the Roblox platform.</p>
-            <p style="margin-top: 1.5rem; font-size: 0.95rem; line-height: 2;">
-                <strong>Payment Structure:</strong><br>
-                • Transaction fees must be covered by the client<br>
-                • 30% upfront payment required to begin work<br>
-                • Remaining 70% due upon project completion
-            </p>
+            <h3>Robux</h3>
+            <p><span class="payment-highlight">Accepted</span></p>
+            <p>I accept payment through Gamepass purchases or group payouts. All Roblox transaction taxes and fees must be covered by you.</p>
         </div>
     </section>
 
@@ -530,51 +582,36 @@
     <section id="terms">
         <h2>Terms of Service</h2>
         <p class="section-subtitle">Please read before commissioning work</p>
-        <div class="terms-content">
-            <h3>1. Project Agreement</h3>
-            <p>All commissions require a clear agreement outlining project scope, deliverables, timeline, and payment terms. Changes to scope after agreement will result in adjusted pricing and timelines.</p>
+        <div class="terms-grid">
+            <div class="terms-box">
+                <h3>01. Requirements</h3>
+                <p>I need a clear 'to-do' list before I start. If you want to change things once I've started coding, we'll treat those as new tasks with a new price.</p>
+            </div>
 
-            <h3>2. Payment Terms</h3>
-            <ul>
-                <li>Payment method: Robux only</li>
-                <li>30% upfront payment required to begin work</li>
-                <li>Remaining 70% due upon project completion</li>
-                <li>All transaction fees must be covered by the client</li>
-                <li>Refunds for unstarted work only, considered case-by-case</li>
-            </ul>
+            <div class="terms-box">
+                <h3>02. Payment Policy</h3>
+                <p>50% upfront, 50% on completion. The price we agree on is final, and you are responsible for covering any transaction taxes/fees.</p>
+            </div>
 
-            <h3>3. Revisions & Support</h3>
-            <p>The number of included revisions will be specified during project agreement. Additional revisions are billed at the hourly rate agreed upon. Post-delivery support is provided as specified in your project agreement.</p>
+            <div class="terms-box">
+                <h3>03. Refunds</h3>
+                <p>No cancellations once confirmed. Upfront payments aren't refundable. I only provide refunds if I am personally unable to finish the task.</p>
+            </div>
 
-            <h3>4. Intellectual Property</h3>
-            <ul>
-                <li>Client receives full rights to commissioned code upon final payment</li>
-                <li>I retain the right to showcase work in my portfolio (unless NDA requested)</li>
-                <li>Generic libraries and frameworks remain my intellectual property</li>
-                <li>Third-party assets will be clearly documented</li>
-            </ul>
+            <div class="terms-box">
+                <h3>04. Bug Fixes</h3>
+                <p>I fix my own bugs for free! Please report issues within 24 hours. After that, any problems are assumed to be from your own edits.</p>
+            </div>
 
-            <h3>5. Confidentiality & NDAs</h3>
-            <p>All project details are kept confidential. NDAs are available upon request at no additional cost for sensitive projects.</p>
+            <div class="terms-box">
+                <h3>05. Ownership</h3>
+                <p>You get the files and full rights after the final payment. I keep the right to show the work here in my portfolio as a showcase.</p>
+            </div>
 
-            <h3>6. Delivery & Quality</h3>
-            <ul>
-                <li>All code is tested before delivery</li>
-                <li>Code follows best practices and is well-documented</li>
-                <li>Source files provided in organized structure</li>
-                <li>Implementation support included during agreed support period</li>
-            </ul>
-
-            <h3>7. Timeline</h3>
-            <p>Project timelines will be confirmed in writing before work begins. Regular progress updates will be provided. Any delays will be communicated immediately.</p>
-
-            <h3>8. Cancellation Policy</h3>
-            <p>Either party may cancel with 48 hours notice. Clients are billed for completed work only. Deposits are non-refundable after work has begun.</p>
-
-            <h3>9. Liability</h3>
-            <p>While I strive for quality and functionality, I cannot guarantee code will be 100% bug-free. I am not liable for any loss of revenue, data, or damages. Liability is limited to the project cost.</p>
-
-            <p style="margin-top: 2rem; font-style: italic; color: rgba(248, 249, 250, 0.6); font-size: 0.9rem;">By commissioning work, you agree to these terms. Last updated: February 2026</p>
+            <div class="terms-box">
+                <h3>06. Ghosting</h3>
+                <p>If you don't respond for 3+ days, the project may be canceled without a refund. Please keep communication lines open!</p>
+            </div>
         </div>
     </section>
 
