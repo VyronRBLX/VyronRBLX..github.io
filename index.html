@@ -126,16 +126,17 @@
         }
 
         .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+            display: flex;
+            justify-content: center;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .about-text {
             font-size: 1.1rem;
             line-height: 1.9;
             color: rgba(255, 255, 255, 0.9);
+            text-align: center;
         }
 
         .about-text p {
@@ -329,6 +330,44 @@
             margin: 0;
         }
 
+        .hero-subsection {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .skill-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .skill-box {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.15), rgba(90, 25, 154, 0.15));
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            color: var(--light);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .skill-box:hover {
+            border-color: var(--light);
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -374,6 +413,15 @@
             .terms-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
+            }
+
+            .skill-boxes {
+                gap: 0.6rem;
+            }
+
+            .skill-box {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
             }
         }
 
@@ -438,6 +486,19 @@
             .terms-box p {
                 font-size: 0.9rem;
             }
+
+            .hero-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .skill-boxes {
+                gap: 0.5rem;
+            }
+
+            .skill-box {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -459,12 +520,36 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>Vyron</h1>
-        <p>Luau Developer & Roblox Scripter</p>
+        <p>Full-Stack Roblox Scripter</p>
+
+        <div class="hero-subsection">
+            <div class="hero-subtitle">TOOLS I USE</div>
+            <div class="skill-boxes">
+                <div class="skill-box">VSCode</div>
+                <div class="skill-box">Rojo</div>
+                <div class="skill-box">Wally</div>
+                <div class="skill-box">Git</div>
+                <div class="skill-box">GitHub</div>
+                <div class="skill-box">Rokit</div>
+            </div>
+        </div>
+
+        <div class="hero-subsection">
+            <div class="hero-subtitle">LANGUAGES I KNOW</div>
+            <div class="skill-boxes">
+                <div class="skill-box">HTML/CSS</div>
+                <div class="skill-box">JavaScript</div>
+                <div class="skill-box">Lua</div>
+                <div class="skill-box">Luau</div>
+                <div class="skill-box">Python</div>
+                <div class="skill-box">C</div>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
     <section id="about">
-        <h2>About Me</h2>
+        <h2>ABOUT ME</h2>
         <p class="section-subtitle">Professional Luau developer specializing in Roblox game development</p>
 
         <div class="about-container">
@@ -480,7 +565,7 @@
 
     <!-- Work Section -->
     <section id="work">
-        <h2>My Work</h2>
+        <h2>MY WORK</h2>
         <p class="section-subtitle">Featured projects showcasing my expertise</p>
 
         <div class="projects-grid">
@@ -548,7 +633,7 @@
 
     <!-- Payment Section -->
     <section id="payment">
-        <h2>Payment Options</h2>
+        <h2>PAYMENT OPTIONS</h2>
         <p class="section-subtitle">Available payment methods</p>
         <div class="payment-container">
             <h3>Robux</h3>
@@ -559,7 +644,7 @@
 
     <!-- Terms of Service -->
     <section id="terms">
-        <h2>Terms of Service</h2>
+        <h2>TERMS OF SERVICE</h2>
         <p class="section-subtitle">Please read before commissioning work</p>
         <div class="terms-grid">
             <div class="terms-box">
@@ -596,7 +681,7 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2>Get in Touch</h2>
+        <h2>GET IN TOUCH</h2>
         <p class="section-subtitle">Let's discuss your next project</p>
         <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
             Ready to collaborate? Reach out through Discord or Roblox. I typically respond within 24 hours.
